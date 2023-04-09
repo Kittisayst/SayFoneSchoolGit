@@ -9,3 +9,5 @@ SayFoneSchool
 6. ທົດສອບການ Run
 
 ![image](https://user-images.githubusercontent.com/85366173/226578255-4cf60512-92a5-45e8-9dd8-e214c105a0af.png)
+
+![sfreport](https://user-images.githubusercontent.com/85366173/230783325-05d60205-dc09-40d8-ae61-3501f4b9f4d5.gif)
