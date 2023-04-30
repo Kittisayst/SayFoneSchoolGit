@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1eb7f01b-1aa4-451d-81ba-f0ea45368469">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pramPayDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parmTitleDate" class="java.util.Date"/>
+	<parameter name="LogoPath" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT ClassRoomName, 
+CASE Gender 
+WHEN 0 THEN 'ນາງ' 
+WHEN 1 THEN 'ທ້າວ' 
+ELSE 'Unknown' 
+END AS GenderLabel,StudentName,PaymentDate,TransferTime,Money,FinancialMonth,FinancialComment
+FROM tb_financial 
+INNER JOIN tb_register ON tb_financial.RegisterID = tb_register.registerID 
+INNER JOIN tb_student ON tb_financial.StudentID = tb_student.StudentID
+WHERE PaymentDate=$P{pramPayDate} AND FinancialType='1';]]>
+	</queryString>
+	<field name="ClassRoomName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GenderLabel" class="java.lang.String"/>
+	<field name="StudentName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PaymentDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[ວັນທີ່ຮັບເງິນ]]></fieldDescription>
+	</field>
+	<field name="TransferTime" class="java.lang.String">
+		<fieldDescription><![CDATA[ເວລາໂອນ]]></fieldDescription>
+	</field>
+	<field name="Money" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FinancialMonth" class="java.lang.Integer">
+		<fieldDescription><![CDATA[ເດືອນຈ່າຍຄ່າເທີມ]]></fieldDescription>
+	</field>
+	<field name="FinancialComment" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="Sum" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{Money}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="256" y="11" width="134" height="50" uuid="bc20f129-b784-4f7c-a51c-ba71d21d9405"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="16"/>
+				</textElement>
+				<text><![CDATA[ໃບລາຍງານປະຈຳວັນທີ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="11" width="100" height="50" uuid="ceccdab6-3c13-47d3-ae82-ac0d133c7891"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="16"/>
+				</textElement>
+				<text><![CDATA[(ເງິນໂອນ)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="215" y="19" width="35" height="35" uuid="176c218c-55d7-4eca-ac5d-eb766974a9d8"/>
+				<imageExpression><![CDATA[$P{LogoPath}]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="390" y="11" width="93" height="50" uuid="e4c4e069-3f3c-4c7b-b1d9-d930b6aee93e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parmTitleDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="516" y="21" width="91" height="40" uuid="03b77954-6484-48b4-92af-9d93a5993782"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ຈຳນວນເງິນ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="28" height="40" uuid="8647ef02-03b1-4a61-a5ed-d1cb2ea47197"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="682" y="21" width="120" height="40" uuid="7d97625a-fbba-4e2b-8a02-be39acc52c1a"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ໝາຍເຫດ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="21" width="34" height="40" uuid="e78832b7-b2fe-4ca6-ad4c-be264af570d4"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ເພດ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="21" width="125" height="40" uuid="c437ca04-ae2f-40a0-886a-561b653112f1"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ຊື່ ແລະ ນາມສະກຸນ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="21" width="87" height="40" uuid="0dcfce9c-b606-4937-be95-19de88f093a8"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ວັນເດືອນປີ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="21" width="121" height="40" uuid="7860f50a-a0ab-4d33-aceb-633d7f1edd2f"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ຫ້ອງຮຽນ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="21" width="121" height="20" uuid="4ac9570d-c561-4484-8354-6ae90eef5821"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ວັນ ແລະ ເວລາໂອນ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="41" width="50" height="20" uuid="3c60340e-0fa9-4a26-a3f9-0a5fcafc409a"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="41" width="71" height="20" uuid="762f6f0d-3b3f-4739-b4ed-7023aa2f6306"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="607" y="21" width="75" height="40" uuid="402066ff-0fcf-4eba-9a45-1ac68bbd10e0"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ເດືອນຈ່າຍຄ່າເທີມ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="149" y="0" width="34" height="20" uuid="66a56ec1-aad2-4c58-8177-ab5644b42d6b"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GenderLabel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="28" y="0" width="121" height="20" uuid="d54ec16f-d83b-434c-af34-40a9704eb9eb"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ClassRoomName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="28" height="20" uuid="89c92165-117a-49a2-a6f5-3475153dec00"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="183" y="0" width="125" height="20" uuid="7acc2c8f-bbcc-435c-aabd-3a61215c7f16"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{StudentName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,### ກີບ">
+				<reportElement x="516" y="0" width="91" height="20" uuid="a794ff9a-a498-4d35-91a9-45645f816e74"/>
+				<box rightPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Money}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="308" y="0" width="87" height="20" uuid="b5f6306c-2e18-4bce-ab01-a0022c0694e6"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PaymentDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="682" y="0" width="120" height="20" uuid="8c07d914-0d0b-4fe0-90a9-81d395253dce"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FinancialComment}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="445" y="0" width="71" height="20" uuid="76d43b51-2a41-46b1-bb06-bc9237f63899"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PaymentDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement x="395" y="0" width="50" height="20" uuid="c2c73b08-4ccc-48e8-87c3-b8b2615614d7"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TransferTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="607" y="0" width="75" height="20" uuid="47f4414b-4d80-4dbe-89b2-4f8606d7d95a"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ເດືອນ "+$F{FinancialMonth}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="349" y="0" width="111" height="20" uuid="6c829851-03f0-4c69-8e99-cfd1a9fbbf8d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="624" y="9" width="88" height="20" uuid="d2d6a2e8-0018-4996-8ad1-16a83579019e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<text><![CDATA[ຈຳນວນເງິນທັງໝົດ:]]></text>
+			</staticText>
+			<textField pattern="#,### ກີບ">
+				<reportElement x="715" y="9" width="87" height="20" uuid="eacde3f0-fe40-4da5-b7a2-d9c97cc7d9d3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Sum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
