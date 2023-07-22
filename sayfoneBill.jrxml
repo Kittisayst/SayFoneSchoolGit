@@ -2,17 +2,20 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SayfoneBill" language="groovy" pageWidth="303" pageHeight="430" columnWidth="293" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="57154301-a25b-4480-9e2b-6ffdf54accdc">
 	<property name="ireport.zoom" value="2.1435888100000016"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="73"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="LogoPath" class="java.lang.String"/>
 	<parameter name="financiaID" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="School" class="java.lang.String"/>
+	<parameter name="English" class="java.lang.String"/>
+	<parameter name="Contact" class="java.lang.String"/>
+	<parameter name="Detail" class="java.lang.String"/>
+	<parameter name="UserAuthen" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT FinancialID,StudentNo,StudentName,ClassRoomName,Name,Money,TransferMoney,Discount,OvertimePay,FinancialMonth,Year,SaveDate FROM tb_financial AS fnc
+		<![CDATA[SELECT FinancialID,StudentNo,StudentName,ClassRoomName,Money,TransferMoney,Discount,OvertimePay,FinancialMonth,Year,SaveDate FROM tb_financial AS fnc
 INNER JOIN tb_student ON fnc.StudentID = tb_student.StudentID
 INNER JOIN tb_register ON fnc.RegisterID=tb_register.registerID
-INNER JOIN tb_user ON fnc.AuthenUserID = tb_user.uid
-INNER JOIN tb_teacher ON tb_user.tid = tb_teacher.TeacherID
 INNER JOIN tb_year ON tb_register.yearID=tb_year.yearID
 WHERE FinancialID = $P{financiaID}]]>
 	</queryString>
@@ -24,9 +27,6 @@ WHERE FinancialID = $P{financiaID}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ClassRoomName" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="Name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="Money" class="java.lang.Integer"/>
@@ -44,21 +44,6 @@ WHERE FinancialID = $P{financiaID}]]>
 	<title>
 		<band height="150" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="45" width="293" height="18" uuid="9ee776b7-4ff9-4c34-b6e9-22adea059e2b"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font fontName="Phetsarath OT" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ໂຮງຮຽນ ອະນຸບານ-ປະຖົມ-ມັດທະຍົມສຶກສາ ສົມບູນ ສາຍຝົນ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="79" width="293" height="29" uuid="49a07b1f-ef4c-45c6-846f-79a4a3622c7a"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Phetsarath OT" size="9"/>
-				</textElement>
-				<text><![CDATA[ຖະຫນົນ ດົງຈອງ ບ. ໂນນສະຫວ່າງ (ຮ່ອມ​ 12), ມ.​ ໄຊເສດຖາ ນະຄອນຫລວງ​ວຽງຈັນ
-ໂທ: 021 461 776, 030 526 9991, FB: Sayfone School (ໂຮງຮຽນ ສາຍຝົນ)]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="0" y="118" width="293" height="31" uuid="26048721-1410-4125-a627-9e65f546ca24"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12" isBold="true"/>
@@ -66,16 +51,30 @@ WHERE FinancialID = $P{financiaID}]]>
 				<text><![CDATA[ໃບຮັບເງິນ (Receipt)]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="124" y="0" width="45" height="35" uuid="3902bfa4-ded6-493e-8869-d50b6ba44b2b"/>
+				<reportElement x="117" y="0" width="51" height="43" uuid="3902bfa4-ded6-493e-8869-d50b6ba44b2b"/>
 				<imageExpression><![CDATA[$P{LogoPath}]]></imageExpression>
 			</image>
-			<staticText>
-				<reportElement x="0" y="63" width="293" height="14" uuid="80ad094f-64fb-4b5e-8cac-7a1dc15e209d"/>
+			<textField>
+				<reportElement x="0" y="48" width="293" height="20" uuid="22970059-d2ec-415a-9bee-e8bebc9d0790"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{School}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="68" width="293" height="16" uuid="cb7010f4-9ce9-46c1-87c6-92e5d53b52f1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="7" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SAYFONE SCHOOL ( KINDERGARTEN - PRIMARY - SECONDARY )]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{English}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="84" width="270" height="29" uuid="36de6f6c-6824-4342-80e5-127390e08640"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Contact}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -158,13 +157,6 @@ WHERE FinancialID = $P{financiaID}]]>
 				<text><![CDATA[ໂອນ:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="135" width="269" height="37" uuid="46276db4-8b92-42dd-bab9-f485da3f1dfb"/>
-				<textElement verticalAlignment="Bottom">
-					<font fontName="Phetsarath OT" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[ຫມາຍເຫດ: ຖ້າທ່ານຜູ້ປົກຄອງຫາກ ຄ້າງຄ່າຮຽນ 2 ເດືອນ, ທາງ ຮ.ຮ ຂໍຖືສິດໂຈະການ ຮຽນ ນ.ຮ ກ່ອນ. ເມື່ອຊໍາລະຍອດຄ້າງແລ້ວ ນ.ຮ ຈິ່ງສາມາດສືບຕໍ່ຮຽນໄດ້.]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="184" y="179" width="35" height="16" uuid="d07e8a3a-3a24-4c28-9c95-136ed93101f6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="9"/>
@@ -222,13 +214,6 @@ WHERE FinancialID = $P{financiaID}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Discount}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="187" y="64" width="106" height="16" uuid="d7966c0e-130c-47d6-8fcb-2f7b90f0c631"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Phetsarath OT" size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,### ກີບ">
 				<reportElement x="118" y="96" width="52" height="16" uuid="66b3f1d2-1012-4a12-a6c1-8c41b94fd2de"/>
 				<textElement verticalAlignment="Middle">
@@ -272,6 +257,20 @@ WHERE FinancialID = $P{financiaID}]]>
 					<font fontName="Phetsarath OT" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{SaveDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="128" width="271" height="37" uuid="cd7be511-4cd5-442c-9059-f263daa03608"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Phetsarath OT" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Detail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="64" width="106" height="16" uuid="9416358c-d439-4988-9266-d01069523c80"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Phetsarath OT" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserAuthen}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
