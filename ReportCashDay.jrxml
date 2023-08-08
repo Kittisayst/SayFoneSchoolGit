@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8dc3d15f-5b49-43c7-ba19-29c37451c88e">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="parmDate" class="java.lang.String">
@@ -104,7 +104,7 @@ WHERE SaveDate=$P{parmDate};]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12"/>
 				</textElement>
-				<text><![CDATA[ລະຫັດນັກຮຽນ]]></text>
+				<text><![CDATA[ລະຫັດນຮ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="155" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#3366FF" uuid="2337ab00-c0d9-4d2b-912a-bc4d0f9c4792"/>
@@ -214,10 +214,10 @@ WHERE SaveDate=$P{parmDate};]]>
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font fontName="Phetsarath OT" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{StudentName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{Gender} == 1 ? "ທ. " : "ນ. ") + $F{StudentName}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="245" y="0" width="66" height="20" uuid="0a845b2a-9c8d-4116-898e-39f232340c2b"/>
